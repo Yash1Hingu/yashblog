@@ -10,10 +10,11 @@ export default function RegisterPage() {
         const response = await fetch('http://localhost:4000/register', {
             method: 'POST',
             body: JSON.stringify({ userName, userPassword }),
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include'
         })
 
-        if(response.status === 200){
+        if (response.status === 200) {
             alert("Registration Successfull");
         } else {
             alert("Registration Failed");

@@ -1,8 +1,10 @@
-import { useState } from "react"
+import { useState } from "react";
+import { Navigate } from 'react-router-dom';
 
 export default function LoginPage() {
     const [userName, setUserName] = useState('');
     const [userPassword, setUserPassword] = useState('');
+    const [redirect, setRedirect] = useState(false);
 
     async function login(event) {
         event.preventDefault();
@@ -13,7 +15,17 @@ export default function LoginPage() {
             headers: { 'Content-Type': 'application/json' }
         });
 
+        if (response.ok) {
+            setRedirect(true);
+        } else {
+            alert('Wrong Credentials');
+        }
     }
+
+    if (redirect) {
+        return <Navigate to={'/'} />
+    }
+
     return <form onSubmit={login} className="login">
         <h1>Login</h1>
         <input
