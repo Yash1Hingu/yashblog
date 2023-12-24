@@ -1,13 +1,19 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
+const UserModel = require('./models/User');
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.post("/register", (req, res) => {
-    const {userName,userPassword} = req.body;
-    res.json({userName,userPassword});
+mongoose.connect(process.env.MONGODB_ATLAS);
+
+app.post("/register", async (req, res) => {
+    const { userName, userPassword } = req.body;
+    const userDoc = await UserModel.create({userName,userPassword});
+    res.json(userDoc);
 })
 app.listen(4000, () => {
     console.log("Server is Running on Port 4000");
