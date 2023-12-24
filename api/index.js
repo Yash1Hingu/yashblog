@@ -12,8 +12,13 @@ mongoose.connect(process.env.MONGODB_ATLAS);
 
 app.post("/register", async (req, res) => {
     const { userName, userPassword } = req.body;
-    const userDoc = await UserModel.create({userName,userPassword});
-    res.json(userDoc);
+
+    try {
+        const userDoc = await UserModel.create({ userName, userPassword });
+        res.json(userDoc);
+    } catch (e) {
+        res.json(e);
+    }
 })
 app.listen(4000, () => {
     console.log("Server is Running on Port 4000");
