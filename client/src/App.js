@@ -16,7 +16,11 @@ function App() {
         </div>
         <div className="texts">
           <h2>New to the web platform in December</h2>
-          <p>Discover some of the interesting features that have landed in stable and beta web browsers during December 2023.</p>
+          <p className="info">
+            <a href="" className="author">yash1hingu</a>
+            <time>2023-01-06 16:34</time>
+          </p>
+          <p className='summary'>Discover some of the interesting features that have landed in stable and beta web browsers during December 2023.</p>
         </div>
       </div>
       <div className="post">
@@ -25,7 +29,11 @@ function App() {
         </div>
         <div className="texts">
           <h2>New to the web platform in December</h2>
-          <p>Discover some of the interesting features that have landed in stable and beta web browsers during December 2023.</p>
+          <p className="info">
+            <a href="" className="author">yash1hingu</a>
+            <time>2023-01-06 16:34</time>
+          </p>
+          <p className='summary'>Discover some of the interesting features that have landed in stable and beta web browsers during December 2023.</p>
         </div>
       </div>
       <div className="post">
@@ -34,7 +42,11 @@ function App() {
         </div>
         <div className="texts">
           <h2>New to the web platform in December</h2>
-          <p>Discover some of the interesting features that have landed in stable and beta web browsers during December 2023.</p>
+          <p className="info">
+            <a href="" className="author">yash1hingu</a>
+            <time>2023-01-06 16:34</time>
+          </p>
+          <p className='summary'>Discover some of the interesting features that have landed in stable and beta web browsers during December 2023.</p>
         </div>
       </div>
     </main>

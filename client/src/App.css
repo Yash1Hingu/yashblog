@@ -42,4 +42,20 @@ div.post{
 }
 div.post .texts h2{
   font-size: 1.8rem;
+  font-weight: bold;
+}
+div.post div.texts p.info{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .8rem;
+}
+p.info .author{
+  text-decoration: none;
+  font-weight: bold;
+  margin: 12px 0;
+}
+p.summary{
+  font-size: 1.1rem;
+  line-height:1.2;
 }
