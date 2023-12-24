@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 img{
   width: 100%;
@@ -58,4 +59,34 @@ p.info .author{
 p.summary{
   font-size: 1.1rem;
   line-height:1.2;
+}
+
+form.login,form.register{
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+form input{
+  display: block;
+  margin-bottom: 5px;
+  width: 100%;
+  padding: 8px 12px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+form button{
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  background-color: #222;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
+
+form h1{
+  margin-bottom: 12px;
+  text-align: center;
 }
