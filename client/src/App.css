@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+img{
+  width: 100%;
+}
 body{
   color: #222;
 }
@@ -14,7 +17,9 @@ main{
 header{
   display: flex;
   justify-content: space-between;
-  margin-bottom: 50px;
+  margin-top: 32px;
+  margin-bottom: 54px;
+  align-items: center;
 }
 
 header a{
@@ -23,8 +28,18 @@ header a{
 }
 header a.logo{
   font-weight: bold;
+  font-size: 1.6rem;
 }
 header nav{
   display: flex;
   gap: 18px;
+}
+div.post{
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+div.post .texts h2{
+  font-size: 1.8rem;
 }
