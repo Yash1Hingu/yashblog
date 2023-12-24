@@ -3,10 +3,11 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
 app.post("/register", (req, res) => {
-    
-    res.json("test2");
+    const {userName,userPassword} = req.body;
+    res.json({userName,userPassword});
 })
 app.listen(4000, () => {
     console.log("Server is Running on Port 4000");

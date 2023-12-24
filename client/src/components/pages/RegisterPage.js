@@ -12,6 +12,9 @@ export default function RegisterPage() {
             body: JSON.stringify({ userName, userPassword }),
             headers: { 'Content-Type': 'application/json' }
         })
+
+        setUserName('');
+        setUserPassword('');
     }
 
     return <form onSubmit={register} className="register">
