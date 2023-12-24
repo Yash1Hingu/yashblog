@@ -20,6 +20,12 @@ app.post("/register", async (req, res) => {
         res.json(e);
     }
 })
+
+app.post("/login", async (req, res) => {
+    const { userName, userPassword } = req.body;
+    const userDoc = await UserModel.findOne({userName});
+    res.json(userDoc);
+})
 app.listen(4000, () => {
     console.log("Server is Running on Port 4000");
 })
