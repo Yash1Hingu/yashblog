@@ -9,6 +9,7 @@ const multer = require('multer');
 const uploadMiddlewear = multer({ dest: 'uploads/' });
 const fs = require('fs');
 const UserModel = require('./models/User');
+const PostModel = require('./models/Post');
 const app = express();
 
 const salt = bcrypt.genSaltSync(10);
@@ -63,13 +64,21 @@ app.post('/logout', (req, res) => {
     res.cookie('token', '',).json('ok');
 })
 
-app.post('/post', uploadMiddlewear.single('file'), (req, res) => {
+app.post('/post', uploadMiddlewear.single('file'), async (req, res) => {
     const { originalname, path } = req.file;
     const parts = originalname.split('.');
     const ext = parts[parts.length - 1];
     const newPath = path + '.' + ext;
     fs.renameSync(path, newPath);
-    res.json();
+
+    const { title, summary, content } = req.body;
+    const postDoc = await PostModel.create({
+        title,
+        summary,
+        content,
+        cover: newPath
+    })
+    res.json(postDoc);
 })
 app.listen(4000, () => {
     console.log("Server is Running on Port 4000");
