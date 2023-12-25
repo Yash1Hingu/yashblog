@@ -87,7 +87,7 @@ app.post('/post', uploadMiddlewear.single('file'), async (req, res) => {
 })
 
 app.get('/post', async (req, res) => {
-    const posts = await PostModel.find().populate('author',['userName']).sort({createdAt: -1});
+    const posts = await PostModel.find().populate('author',['userName']).sort({createdAt: -1}).limit(20);
     res.json(posts);
 })
 app.listen(4000, () => {
