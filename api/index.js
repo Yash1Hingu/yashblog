@@ -18,6 +18,7 @@ const secret = process.env.SECRETJWT;
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(cookieParser());
 app.use(express.json());
+app.use('/uploads',express.static(__dirname+'/uploads'));
 mongoose.connect(process.env.MONGODB_ATLAS);
 
 app.post("/register", async (req, res) => {
