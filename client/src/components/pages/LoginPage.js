@@ -12,7 +12,8 @@ export default function LoginPage() {
         const response = await fetch('http://localhost:4000/login', {
             method: 'POST',
             body: JSON.stringify({ userName, userPassword }),
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
         });
 
         if (response.ok) {
