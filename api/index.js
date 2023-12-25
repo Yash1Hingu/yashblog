@@ -80,6 +80,11 @@ app.post('/post', uploadMiddlewear.single('file'), async (req, res) => {
     })
     res.json(postDoc);
 })
+
+app.get('/post', async (req, res) => {
+    const posts = await PostModel.find();
+    res.json(posts);
+})
 app.listen(4000, () => {
     console.log("Server is Running on Port 4000");
 })
