@@ -18,13 +18,21 @@ export default function Header() {
         })
     }, []);
 
+    function handleLogout() {
+        fetch('http://localhost:4000/logout', {
+            credentials: 'include',
+            method: 'POST',
+        })
+        setUserName(null);
+    }
+
     return <header>
         <Link to="/" className="logo">Yash-Blog</Link>
         <nav>
             {userName && (
                 <>
                     <Link to="/create">Create New Post</Link>
-                    <a>Logout</a>
+                    <a onClick={handleLogout}>Logout</a>
                 </>
             )}
             {!userName && (
