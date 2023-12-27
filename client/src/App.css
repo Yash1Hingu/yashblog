@@ -41,6 +41,10 @@ div.post{
   gap: 24px;
   margin-bottom: 32px;
 }
+div.post a{
+  text-decoration: none;
+  color: inherit;
+}
 div.post .texts h2{
   font-size: 1.8rem;
   font-weight: bold;
