@@ -94,10 +94,38 @@ app.get('/post', async (req, res) => {
 
 app.get('/post/:id', async (req, res) => {
     const { id } = req.params;
-    const postDoc = await PostModel.findById(id).populate('author',['userName']);
+    const postDoc = await PostModel.findById(id).populate('author', ['userName']);
     res.json(postDoc);
 })
 
+app.put('/post', uploadMiddlewear.single('file'), async (req, res) => {
+    let newPath = null;
+    if (req.file) {
+        const { originalname, path } = req.file;
+        const parts = originalname.split('.');
+        const ext = parts[parts.length - 1];
+        newPath = path + '.' + ext;
+        fs.renameSync(path, newPath);
+    }
+
+    const { token } = req.cookies;
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) throw err;
+        const { title, summary, content, id } = req.body;
+        const postDoc = await PostModel.findById(id);
+        const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
+        if(!isAuthor) {
+            return res.status(400).json('you are not a Author');
+        }
+        await postDoc.updateOne({
+            title,
+            summary,
+            content,
+            cover: newPath ? newPath : postDoc.cover,
+        })
+        res.json(postDoc);
+    })
+})
 app.listen(4000, () => {
     console.log("Server is Running on Port 4000");
 })
