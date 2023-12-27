@@ -18,7 +18,7 @@ const secret = process.env.SECRETJWT;
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(cookieParser());
 app.use(express.json());
-app.use('/uploads',express.static(__dirname+'/uploads'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
 mongoose.connect(process.env.MONGODB_ATLAS);
 
 app.post("/register", async (req, res) => {
@@ -88,8 +88,14 @@ app.post('/post', uploadMiddlewear.single('file'), async (req, res) => {
 })
 
 app.get('/post', async (req, res) => {
-    const posts = await PostModel.find().populate('author',['userName']).sort({createdAt: -1}).limit(20);
+    const posts = await PostModel.find().populate('author', ['userName']).sort({ createdAt: -1 }).limit(20);
     res.json(posts);
+})
+
+app.get('/post/:id', async (req, res) => {
+    const { id } = req.params;
+    const postDoc = await PostModel.findById(id).populate('author',['userName']);
+    res.json(postDoc);
 })
 app.listen(4000, () => {
     console.log("Server is Running on Port 4000");
