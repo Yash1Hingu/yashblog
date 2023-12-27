@@ -97,6 +97,7 @@ app.get('/post/:id', async (req, res) => {
     const postDoc = await PostModel.findById(id).populate('author',['userName']);
     res.json(postDoc);
 })
+
 app.listen(4000, () => {
     console.log("Server is Running on Port 4000");
 })
