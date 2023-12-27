@@ -158,14 +158,25 @@ div.post-page div.content {
   margin: 24px 0;
 }
 
-div.post-page div.edit_container{
-  text-align: center;
+div.post-page div.edit_container {
   margin-bottom: 18px;
+  display: flex;
+  justify-content: center;
 }
-div.post-page div.edit_container a{
+
+div.post-page div.edit_container a svg {
+  width: 18px;
+  height: 18px;
+}
+
+div.post-page div.edit_container a {
   text-decoration: none;
   background-color: #333;
   color: #ddd;
   padding: 6px 12px;
   border-radius: 4px;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 4px;
 }
