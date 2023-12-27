@@ -10,16 +10,16 @@ export default function PostPage() {
                 setPostInfo(postInfo);
             })
         })
-    }, [])
+    }, [])  
 
     if(!postInfo) return '';
-    return <div>
+    return <div className="post-page">
+        <h1>{postInfo.title}</h1>
+        <p className="author">by {postInfo.author['userName']}</p>
+        <time>{new Date(postInfo.createdAt).toUTCString()}</time>
         <div className="image">
             <img src={`http://localhost:4000/${postInfo.cover}`} alt="" />
         </div>
-        <h1>{postInfo.title}</h1>
-        <p>{postInfo.author['userName']}</p>
-        <time>{new Date(postInfo.createdAt).toUTCString()}</time>
-        <div dangerouslySetInnerHTML={{__html:postInfo.content}}/>
+        <div dangerouslySetInnerHTML={{__html:postInfo.content}} className="content"/>
     </div>
 }
