@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: 'Kumbh Sans', sans-serif;
 }
 
 img {
@@ -10,7 +12,8 @@ img {
 }
 
 body {
-  color: #222;
+  background-color: #141414;
+  color: #fff;
 }
 
 main {
@@ -20,6 +23,9 @@ main {
 }
 
 header {
+  background-color: #1A1A1A;
+  padding: 12px 24px;
+  border-radius: 8px;
   display: flex;
   justify-content: space-between;
   margin-top: 32px;
@@ -31,11 +37,20 @@ header a {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 header a.logo {
   font-weight: bold;
   font-size: 1.6rem;
+}
+
+header .create_post_btn {
+  background: linear-gradient(90deg, #05B3FF 0%, #F40058 50%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 header nav {
@@ -47,7 +62,12 @@ div.post {
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
-  margin-bottom: 32px;
+  border-bottom: 1px solid #333;
+  padding: 24px 8px;
+  border-radius: 12px;
+}
+div.post:hover{
+  background-color: #222;
 }
 
 @media screen and (min-width:767px) {
@@ -60,9 +80,11 @@ div.post a {
   text-decoration: none;
   color: inherit;
 }
-
+div.post div.image img{
+  border-radius: 12px;
+}
 div.post .texts h2 {
-  font-size: 1.8rem;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -71,6 +93,7 @@ div.post div.texts p.info {
   align-items: center;
   gap: 8px;
   font-size: .8rem;
+  opacity: 0.5;
 }
 
 p.info .author {
@@ -82,6 +105,7 @@ p.info .author {
 p.summary {
   font-size: 1.1rem;
   line-height: 1.2;
+  opacity: 0.4;
 }
 
 form.login,
@@ -91,13 +115,15 @@ form.register {
 }
 
 form input {
+  background-color: #141414;
+  color: #ddd;
   display: block;
   margin-bottom: 5px;
   width: 100%;
   padding: 8px 12px;
   border: 2px solid #ddd;
   border-radius: 4px;
-  margin-bottom: 12px;
+  margin-bottom: 18px;
 }
 
 form button {
@@ -124,6 +150,7 @@ div.post-page div.image {
   max-height: 200px;
   overflow: hidden;
   display: flex;
+  border-radius: 12px;
 }
 
 div.post-image div.image img {
@@ -132,7 +159,7 @@ div.post-image div.image img {
 }
 
 div.post-page a {
-  color: #333;
+  color: #ddd;
   text-decoration: underline;
 }
 
@@ -144,7 +171,8 @@ div.post-page h1 {
 div.post-page .author {
   text-align: center;
   margin-bottom: 4px;
-  color: #222;
+  color: #ddd;
+  opacity: 0.7;
   font-weight: 900;
 }
 
@@ -152,11 +180,13 @@ div.post-page time {
   text-align: center;
   display: block;
   margin-bottom: 24px;
-  color: #3333339a;
+  color: #ddd;
+  opacity: 0.7;
 }
 
 div.post-page div.content {
   margin: 24px 0;
+  line-height: 1.8;
 }
 
 div.post-page div.edit_container {

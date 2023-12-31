@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../store/user-context";
+import yashlogo from '../images/yash-logo.svg';
 
 export default function Header() {
     const { userInfo, setUserInfo } = useContext(UserContext);
@@ -30,12 +31,14 @@ export default function Header() {
     const userName = userInfo?.userName;
 
     return <header>
-        <Link to="/" className="logo">Yash-Blog</Link>
+        <Link to="/" className="logo">
+            <img src={yashlogo} alt="" />
+        </Link>
         <nav>
             {userName && (
                 <>
                     <p>hello ,{userName}</p>
-                    <Link to="/create">Create New Post</Link>
+                    <Link to="/create" className="create_post_btn">Create New Post</Link>
                     <a onClick={handleLogout}>Logout</a>
                 </>
             )}
