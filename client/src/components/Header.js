@@ -6,7 +6,7 @@ import yashlogo from '../images/yash-logo.svg';
 export default function Header() {
     const { userInfo, setUserInfo } = useContext(UserContext);
     useEffect(() => {
-        fetch('http://localhost:4000/profile', {
+        fetch('https://yashblogapi.vercel.app/profile', {
             method: "GET",
             credentials: "include",
             headers: {
@@ -21,7 +21,7 @@ export default function Header() {
     }, []);
 
     function handleLogout() {
-        fetch('http://localhost:4000/logout', {
+        fetch('https://yashblogapi.vercel.app/logout', {
             credentials: 'include',
             method: 'POST',
         })
