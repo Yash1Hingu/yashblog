@@ -126,6 +126,6 @@ app.put('/post', uploadMiddlewear.single('file'), async (req, res) => {
         res.json(postDoc);
     })
 })
-app.listen(4000, () => {
+app.listen(process.env.PORT || 4000, () => {
     console.log("Server is Running on Port 4000");
 })
