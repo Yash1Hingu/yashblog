@@ -21,6 +21,10 @@ app.use(express.json());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 mongoose.connect(process.env.MONGODB_ATLAS);
 
+app.get('/',(req,res)=>{
+    console.log('hello');
+})
+
 app.post("/register", async (req, res) => {
     const { userName, userPassword } = req.body;
 
@@ -126,6 +130,6 @@ app.put('/post', uploadMiddlewear.single('file'), async (req, res) => {
         res.json(postDoc);
     })
 })
-app.listen(process.env.PORT || 4000, () => {
+app.listen(4000, () => {
     console.log("Server is Running on Port 4000");
 })
