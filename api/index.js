@@ -15,18 +15,13 @@ const app = express();
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.SECRETJWT;
 
-app.use(cors({
-    origin: "https://yashblog.vercel.app",
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-    allowedHeaders: ['Content-Type', "Authorization", "Access-Control-Allow-Credentials", "Access-Control-Allow-Origin"],
-    credentials: true
-}));
+app.use(cors({ credentials: true, origin: 'https://yashblog.vercel.app' }));
 app.use(cookieParser());
 app.use(express.json());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 mongoose.connect(process.env.MONGODB_ATLAS);
 
-app.get('/', (req, res) => {
+app.get('/',(req,res)=>{
     console.log('hello');
 })
 
@@ -123,7 +118,7 @@ app.put('/post', uploadMiddlewear.single('file'), async (req, res) => {
         const { title, summary, content, id } = req.body;
         const postDoc = await PostModel.findById(id);
         const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
-        if (!isAuthor) {
+        if(!isAuthor) {
             return res.status(400).json('you are not a Author');
         }
         await postDoc.updateOne({
