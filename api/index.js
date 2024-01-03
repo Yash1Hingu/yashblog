@@ -15,11 +15,15 @@ const app = express();
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.SECRETJWT;
 
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(cookieParser());
 app.use(express.json());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 mongoose.connect(process.env.MONGODB_ATLAS);
+app.use(cors({ credentials: true, origin: 'https://yashblogs.onrender.com' }));
+
+app.get('/',(req,res)=>{
+    console.log('hello');
+})
 
 app.post("/register", async (req, res) => {
     const { userName, userPassword } = req.body;

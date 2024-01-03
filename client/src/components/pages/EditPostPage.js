@@ -30,7 +30,7 @@ export default function EditPost() {
     const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
-        fetch(`http://localhost:4000/post/${id}`).then(response => {
+        fetch(`https://yashblogapi.onrender.com/post/${id}`).then(response => {
             response.json().then(postInfo => {
                 setTitle(postInfo.title);
                 setSummary(postInfo.summary);
@@ -49,7 +49,7 @@ export default function EditPost() {
             data.set('file', files?.[0]);
         }
         ev.preventDefault();
-        const response = await fetch(`http://localhost:4000/post`, {
+        const response = await fetch(`https://yashblogapi.onrender.com/post`, {
             method: 'PUT',
             body: data,
             credentials: 'include'
