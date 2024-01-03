@@ -11,7 +11,7 @@ export default function LoginPage() {
     async function login(event) {
         event.preventDefault();
 
-        const response = await fetch('https://yashblogapi.vercel.app/login', {
+        const response = await fetch('https://yashblogapi.onrender.com/login', {
             method: 'POST',
             body: JSON.stringify({ userName, userPassword }),
             headers: { 'Content-Type': 'application/json' },

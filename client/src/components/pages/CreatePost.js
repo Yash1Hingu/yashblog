@@ -33,7 +33,7 @@ export default function CreatePost() {
         data.set('file', files[0]);
         ev.preventDefault();
         console.log(files);
-        const response = await fetch('https://yashblogapi.vercel.app/post', {
+        const response = await fetch('https://yashblogapi.onrender.com/post', {
             method: 'POST',
             body: data,
             credentials: 'include'

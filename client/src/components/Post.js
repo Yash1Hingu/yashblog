@@ -5,7 +5,7 @@ export default function Post({ title, summary, content, createdAt, cover, author
     return <div className="post">
         <div className="image">
             <Link to={'/post/'+_id}>
-                <img src={'https://yashblogapi.vercel.app/' + cover} alt="" />
+                <img src={'https://yashblogapi.onrender.com/' + cover} alt="" />
             </Link>
         </div>
         <div className="texts">
