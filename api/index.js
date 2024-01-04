@@ -21,7 +21,7 @@ app.use(express.json());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 mongoose.connect(process.env.MONGODB_ATLAS);
 
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
     console.log('hello');
 })
 
@@ -91,7 +91,7 @@ app.post('/post', uploadMiddlewear.single('file'), async (req, res) => {
     })
 })
 
-app.get('/post', async (req, res) => {
+app.get('/post', cors({ origin: "https://yashblogs.onrender.com" }), async (req, res) => {
     const posts = await PostModel.find().populate('author', ['userName']).sort({ createdAt: -1 }).limit(20);
     res.json(posts);
 })
@@ -118,7 +118,7 @@ app.put('/post', uploadMiddlewear.single('file'), async (req, res) => {
         const { title, summary, content, id } = req.body;
         const postDoc = await PostModel.findById(id);
         const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
-        if(!isAuthor) {
+        if (!isAuthor) {
             return res.status(400).json('you are not a Author');
         }
         await postDoc.updateOne({
