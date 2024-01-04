@@ -11,7 +11,15 @@ const fs = require('fs');
 const UserModel = require('./models/User');
 const PostModel = require('./models/Post');
 const app = express();
-app.use(cors({ credentials: true, origin: "https://yashblogs.onrender.com" }));
+// app.use(cors({ credentials: true, origin: "https://yashblogs.onrender.com" }));
+app.use(cors(
+    {
+        origin: "https://yashblogs.onrender.com",
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+        allowedHeaders: ['Content-Type', "Authorization", "Access-Control-Allow-Credentials", "Access-Control-Allow-Origin"],
+        credentials: true
+    }
+))
 
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.SECRETJWT;
