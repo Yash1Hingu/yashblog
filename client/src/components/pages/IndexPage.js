@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Post from "../Post";
+import { API_PORT } from "../../util/path";
 
 export default function IndexPage() {
     const [posts, setPosts] = useState([]);
     useEffect(() => {
-        fetch('https://yashblogapi.onrender.com/post', { mode: 'cors' }).then(response => {
+        fetch(`${API_PORT}post`).then(response => {
             response.json().then(posts => {
                 setPosts(posts);
             })

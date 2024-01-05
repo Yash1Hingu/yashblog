@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Navigate } from 'react-router-dom';
 import { UserContext } from "../../store/user-context";
+import { API_PORT } from "../../util/path";
 
 export default function LoginPage() {
     const [userName, setUserName] = useState('');
@@ -11,7 +12,7 @@ export default function LoginPage() {
     async function login(event) {
         event.preventDefault();
 
-        const response = await fetch('https://yashblogapi.onrender.com/login', {
+        const response = await fetch(`${API_PORT}login`, {
             method: 'POST',
             body: JSON.stringify({ userName, userPassword }),
             headers: { 'Content-Type': 'application/json' },

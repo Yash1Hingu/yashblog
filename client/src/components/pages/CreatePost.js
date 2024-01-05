@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Navigate } from 'react-router-dom';
+import { API_PORT } from '../../util/path';
 
 const modules = {
     toolbar: [
@@ -33,7 +34,7 @@ export default function CreatePost() {
         data.set('file', files[0]);
         ev.preventDefault();
         console.log(files);
-        const response = await fetch('https://yashblogapi.onrender.com/post', {
+        const response = await fetch(`${API_PORT}post`, {
             method: 'POST',
             body: data,
             credentials: 'include'

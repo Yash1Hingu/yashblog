@@ -1,11 +1,12 @@
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import { API_PORT } from '../util/path';
 export default function Post({ title, summary, content, createdAt, cover, author , _id}) {
     const shortSummary = summary.length > 100 ? summary.slice(0, 100) + "..." : summary;
     return <div className="post">
         <div className="image">
             <Link to={'/post/'+_id}>
-                <img src={'https://yashblogapi.onrender.com/' + cover} alt="" />
+                <img src={API_PORT + cover} alt="" />
             </Link>
         </div>
         <div className="texts">

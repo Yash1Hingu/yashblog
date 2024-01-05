@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { API_PORT } from "../../util/path";
 
 export default function RegisterPage() {
     const [userName, setUserName] = useState('');
@@ -7,7 +8,7 @@ export default function RegisterPage() {
     async function register(event) {
         event.preventDefault();
 
-        const response = await fetch('https://yashblogapi.onrender.com/register', {
+        const response = await fetch(`${API_PORT}register`, {
             method: 'POST',
             body: JSON.stringify({ userName, userPassword }),
             headers: { 'Content-Type': 'application/json' },

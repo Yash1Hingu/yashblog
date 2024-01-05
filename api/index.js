@@ -11,15 +11,15 @@ const fs = require('fs');
 const UserModel = require('./models/User');
 const PostModel = require('./models/Post');
 const app = express();
-// app.use(cors({ credentials: true, origin: "https://yashblogs.onrender.com" }));
-app.use(cors(
-    {
-        origin: "https://yashblogs.onrender.com",
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-        allowedHeaders: ['Content-Type', "Authorization", "Access-Control-Allow-Credentials", "Access-Control-Allow-Origin"],
-        credentials: true
-    }
-))
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+// app.use(cors(
+//     {
+//         origin: "https://yashblogs.onrender.com",
+//         methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+//         allowedHeaders: ['Content-Type', "Authorization", "Access-Control-Allow-Credentials", "Access-Control-Allow-Origin"],
+//         credentials: true
+//     }
+// ))
 
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.SECRETJWT;
@@ -67,10 +67,13 @@ app.post("/login", async (req, res) => {
 
 app.get("/profile", (req, res) => {
     const { token } = req.cookies;
-    jwt.verify(token, secret, {}, (err, info) => {
-        if (err) throw err;
-        res.json(info);
-    })
+    if(token){
+        jwt.verify(token, secret, {}, (err, info) => {
+            if (err) throw err;
+            res.json(info);
+        })
+    }
+    res.json({});
 })
 
 app.post('/logout', (req, res) => {
@@ -99,7 +102,7 @@ app.post('/post', uploadMiddlewear.single('file'), async (req, res) => {
     })
 })
 
-app.get('/post', cors({ origin: "https://yashblogs.onrender.com" }), async (req, res) => {
+app.get('/post', async (req, res) => {
     const posts = await PostModel.find().populate('author', ['userName']).sort({ createdAt: -1 }).limit(20);
     res.json(posts);
 })

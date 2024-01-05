@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react"
 import { Link, useParams } from "react-router-dom"
 import { UserContext } from "../../store/user-context";
+import { API_PORT } from "../../util/path";
 
 export default function PostPage() {
     const [postInfo, setPostInfo] = useState(null);
@@ -8,7 +9,7 @@ export default function PostPage() {
     const { userInfo } = useContext(UserContext);
     const { id } = useParams();
     useEffect(() => {
-        fetch(`https://yashblogapi.onrender.com/post/${id}`).then(response => {
+        fetch(`${API_PORT}post/${id}`).then(response => {
             response.json().then(postInfo => {
                 setPostInfo(postInfo);
             })
@@ -31,7 +32,7 @@ export default function PostPage() {
             </div>
         )}
         <div className="image">
-            <img src={`https://yashblogapi.onrender.com/${postInfo.cover}`} alt="" />
+            <img src={`${API_PORT}${postInfo.cover}`} alt="" />
         </div>
         <div dangerouslySetInnerHTML={{ __html: postInfo.content }} className="content" />
     </div>
