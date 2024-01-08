@@ -11,7 +11,8 @@ const fs = require('fs');
 const UserModel = require('./models/User');
 const PostModel = require('./models/Post');
 const app = express();
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+const CLIENT_URL = "https://yashblog.vercel.app"
+app.use(cors({ credentials: true, origin: CLIENT_URL }));
 // app.use(cors(
 //     {
 //         origin: "https://yashblogs.onrender.com",
@@ -67,7 +68,7 @@ app.post("/login", async (req, res) => {
 
 app.get("/profile", (req, res) => {
     const { token } = req.cookies;
-    if(token){
+    if (token) {
         jwt.verify(token, secret, {}, (err, info) => {
             if (err) throw err;
             res.json(info);
