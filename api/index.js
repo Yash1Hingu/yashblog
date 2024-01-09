@@ -31,7 +31,7 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
 mongoose.connect(process.env.MONGODB_ATLAS);
 
 app.get('/', (req, res) => {
-    console.log('hello');
+    res.json("My API Running");
 })
 
 app.post("/register", async (req, res) => {
