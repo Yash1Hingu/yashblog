@@ -1,9 +1,11 @@
 import { useState } from "react"
 import { API_PORT } from "../../util/path";
+import { Navigate } from "react-router-dom";
 
 export default function RegisterPage() {
     const [userName, setUserName] = useState('');
     const [userPassword, setUserPassword] = useState('');
+    const [redirect, setRedirect] = useState(false);
 
     async function register(event) {
         event.preventDefault();
@@ -16,12 +18,16 @@ export default function RegisterPage() {
         })
 
         if (response.status === 200) {
-            alert("Registration Successfull");
+            setRedirect(true);
         } else {
             alert("Registration Failed");
         }
         setUserName('');
         setUserPassword('');
+    }
+
+    if (redirect) {
+        return <Navigate to={'/login'} />
     }
 
     return <form onSubmit={register} className="register">
