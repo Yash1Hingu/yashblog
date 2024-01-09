@@ -6,7 +6,7 @@ export default function Post({ title, summary, content, createdAt, cover, author
     return <div className="post">
         <div className="image">
             <Link to={'/post/'+_id}>
-                <img src={API_PORT + cover} alt="" />
+                <img src={cover} alt="" />
             </Link>
         </div>
         <div className="texts">

@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
+const imgbbUploader = require("imgbb-uploader");
 const uploadMiddlewear = multer({ dest: 'uploads/' });
 const fs = require('fs');
 const UserModel = require('./models/User');
@@ -85,8 +86,17 @@ app.post('/post', uploadMiddlewear.single('file'), async (req, res) => {
     const { originalname, path } = req.file;
     const parts = originalname.split('.');
     const ext = parts[parts.length - 1];
-    const newPath = path + '.' + ext;
+    let newPath = path + '.' + ext;
     fs.renameSync(path, newPath);
+    const uplfilepath = newPath;
+
+    await imgbbUploader(process.env.IMGBB, newPath)
+        .then((response) => {
+            newPath = response.url;
+        })
+        .catch((error) => console.error(error));
+
+    fs.unlinkSync(uplfilepath);
 
     const { token } = req.cookies;
     jwt.verify(token, secret, {}, async (err, info) => {
