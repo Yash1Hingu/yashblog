@@ -7,12 +7,19 @@ import { API_PORT } from "../util/path";
 export default function Header() {
     const { userInfo, setUserInfo } = useContext(UserContext);
     useEffect(() => {
-        fetch(`${API_PORT}profile`).then(response => {
+        fetch(`${API_PORT}profile`, {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }).then(response => {
             response.json().then(userInfo => {
                 setUserInfo(userInfo);
             })
         })
-    }, []); 
+    }, []);
 
     function handleLogout() {
         fetch(`${API_PORT}logout`, {
