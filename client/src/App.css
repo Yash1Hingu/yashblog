@@ -55,6 +55,7 @@ header .create_post_btn {
 
 header nav {
   display: flex;
+  flex-direction: column;
   gap: 18px;
 }
 
@@ -74,6 +75,10 @@ div.post:hover {
 @media screen and (min-width:767px) {
   div.post {
     grid-template-columns: .9fr 1.1fr;
+  }
+
+  header nav {
+    flex-direction: row;
   }
 }
 
@@ -233,13 +238,14 @@ div.post-page div.edit_container a {
   max-width: 40rem;
   animation: fade-slide-up 0.3s ease-out forwards;
 }
-.modal.loading{
+
+.modal.loading {
   background-color: transparent;
   border: none;
   overflow: hidden;
   display: flex;
   justify-content: center;
-  box-shadow:none;
+  box-shadow: none;
 }
 
 .modal::backdrop {
