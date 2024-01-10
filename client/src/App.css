@@ -291,3 +291,21 @@ div.post-page div.edit_container a {
     transform: rotate(360deg);
   }
 }
+
+.loader-post  {
+  border-radius: 12px;
+  margin-bottom: 24px;
+  background: linear-gradient(240deg,#141313,#393939);
+  height: 250px;
+  background-size: 120%;
+  animation: gradient-animation 1s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 100% 0%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
