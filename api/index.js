@@ -13,6 +13,7 @@ const UserModel = require('./models/User');
 const PostModel = require('./models/Post');
 const app = express();
 const CLIENT_URL = "https://yashblogs.onrender.com"
+// const CLIENT_URL = "http://localhost:3000"
 app.use(cors({ credentials: true, origin: CLIENT_URL }));
 // app.use(cors(
 //     {
@@ -52,6 +53,10 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
     const { userName, userPassword } = req.body;
     const userDoc = await UserModel.findOne({ userName });
+    if(!userDoc){
+        res.status(400).json({message:'invalid_username'});
+        return;
+    }
     const passOk = bcrypt.compareSync(userPassword, userDoc.userPassword);
     if (passOk) {
         //logged in
@@ -63,7 +68,7 @@ app.post("/login", async (req, res) => {
             });
         });
     } else {
-        res.status(400).json('wrong credentials');
+        res.status(400).json({message:'invalid_userpassword'});
     }
 })
 

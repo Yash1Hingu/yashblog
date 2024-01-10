@@ -141,6 +141,10 @@ form.register h1 {
   margin-bottom: 12px;
   text-align: center;
 }
+.control-error{
+  color: #F40058;
+  margin-bottom: 5px;
+}
 
 button {
   margin-top: 12px;

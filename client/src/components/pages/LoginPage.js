@@ -2,16 +2,34 @@ import { useContext, useState } from "react";
 import { Navigate } from 'react-router-dom';
 import { UserContext } from "../../store/user-context";
 import { API_PORT } from "../../util/path";
+import Input from "../UI/Input";
+import { useInput } from "../hooks/useInput";
+import { isEmail, isNotEmpty, hasMinLength } from '../../util/validation.js';
 
 export default function LoginPage() {
-    const [userName, setUserName] = useState('');
-    const [userPassword, setUserPassword] = useState('');
+    const {
+        value: userName,
+        handleUserInput: handleuserNameInput,
+        handleBlur: handleuserNameBlur,
+        hasError: userNameIsValid
+    } = useInput("", (value) => isEmail(value) && isNotEmpty(value));
+
+    const {
+        value: userPassword,
+        handleUserInput: handleuserPasswordInput,
+        handleBlur: handleuserPasswordBlur,
+        hasError: userpasswordIsValid
+    } = useInput("", (value) => hasMinLength(value, 8) && isNotEmpty(value));
+
     const [redirect, setRedirect] = useState(false);
     const { userInfo, setUserInfo } = useContext(UserContext);
 
     async function login(event) {
         event.preventDefault();
-
+        
+        if(userNameIsValid || userpasswordIsValid){
+            return;
+        }
         const response = await fetch(`${API_PORT}login`, {
             method: 'POST',
             body: JSON.stringify({ userName, userPassword }),
@@ -22,11 +40,16 @@ export default function LoginPage() {
         if (response.ok) {
             response.json().then(userInfo => {
                 setUserInfo(userInfo);
-                console.log("yes")
                 setRedirect(true);
             })
         } else {
-            alert('Wrong Credentials');
+            response.json().then(isvalid => {
+                if (isvalid.message === "invalid_username") {
+                    alert("User is Not Exist.")
+                } else if (isvalid.message === "invalid_userpassword") {
+                    alert("Enter Correct Password")
+                }
+            })
         }
     }
 
@@ -36,17 +59,29 @@ export default function LoginPage() {
 
     return <form onSubmit={login} className="login">
         <h1>Login</h1>
-        <input
+        <Input
+            label="Username"
+            id="username"
             type="text"
-            placeholder="username"
+            name="username"
+            placeholder="user@gmail.com"
+            onBlur={handleuserNameBlur}
+            onChange={handleuserNameInput}
             value={userName}
-            onChange={(event) => { setUserName(event.target.value) }}
+            error={userNameIsValid && "Please Enter Valid Email."}
+            required
         />
-        <input
+        <Input
+            label="Password"
+            id="password"
             type="password"
-            placeholder="password"
+            name="password"
+            placeholder="********"
+            onBlur={handleuserPasswordBlur}
+            onChange={handleuserPasswordInput}
             value={userPassword}
-            onChange={(event) => { setUserPassword(event.target.value) }}
+            error={userpasswordIsValid && "Please Enter Valid Password."}
+            required
         />
         <button>Login</button>
     </form>
