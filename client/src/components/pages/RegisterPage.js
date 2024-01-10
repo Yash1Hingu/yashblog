@@ -1,11 +1,13 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { API_PORT } from "../../util/path";
 import { Navigate } from "react-router-dom";
 import { useInput } from "../hooks/useInput";
 import { hasMinLength, isEmail, isNotEmpty } from "../../util/validation";
 import Input from "../UI/Input";
+import UserProgressContext from "../../store/UserProgressContext";
 
 export default function RegisterPage() {
+    const userProgressCtx = useContext(UserProgressContext);
     const {
         value: userName,
         handleUserInput: handleuserNameInput,
@@ -30,13 +32,14 @@ export default function RegisterPage() {
         if (userNameIsValid || userpasswordIsValid) {
             return;
         }
+        userProgressCtx.showModal('Loading');
         const response = await fetch(`${API_PORT}register`, {
             method: 'POST',
             body: JSON.stringify({ userName, userPassword }),
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'
         })
-
+        userProgressCtx.hideModal();
         if (response.status === 200) {
             setRedirect(true);
         } else {

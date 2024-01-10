@@ -5,8 +5,10 @@ import { API_PORT } from "../../util/path";
 import Input from "../UI/Input";
 import { useInput } from "../hooks/useInput";
 import { isEmail, isNotEmpty, hasMinLength } from '../../util/validation.js';
+import UserProgressContext from "../../store/UserProgressContext.js";
 
 export default function LoginPage() {
+    const userProgressCtx = useContext(UserProgressContext);
     const {
         value: userName,
         handleUserInput: handleuserNameInput,
@@ -30,13 +32,14 @@ export default function LoginPage() {
         if(userNameIsValid || userpasswordIsValid){
             return;
         }
+        userProgressCtx.showModal('Loading');
         const response = await fetch(`${API_PORT}login`, {
             method: 'POST',
             body: JSON.stringify({ userName, userPassword }),
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
         });
-
+        userProgressCtx.hideModal();
         if (response.ok) {
             response.json().then(userInfo => {
                 setUserInfo(userInfo);
@@ -45,9 +48,10 @@ export default function LoginPage() {
         } else {
             response.json().then(isvalid => {
                 if (isvalid.message === "invalid_username") {
-                    alert("User is Not Exist.")
+                    userProgressCtx.showModal('Invalid User Name');
+                    
                 } else if (isvalid.message === "invalid_userpassword") {
-                    alert("Enter Correct Password")
+                    userProgressCtx.showModal('Invalid User Password');
                 }
             })
         }

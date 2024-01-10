@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Navigate } from 'react-router-dom';
 import { API_PORT } from '../../util/path';
+import UserProgressContext from '../../store/UserProgressContext';
 
 const modules = {
     toolbar: [
@@ -21,6 +22,7 @@ const formats = [
 ];
 
 export default function CreatePost() {
+    const userProgressCtx = useContext(UserProgressContext);
     const [title, setTitle] = useState('');
     const [summary, setSummary] = useState('');
     const [content, setContent] = useState('');
@@ -34,12 +36,13 @@ export default function CreatePost() {
         data.set('file', files[0]);
         ev.preventDefault();
         console.log(files);
+        userProgressCtx.showModal('Loading');
         const response = await fetch(`${API_PORT}post`, {
             method: 'POST',
             body: data,
             credentials: 'include'
         })
-
+        userProgressCtx.hideModal();
         if (response.ok) {
             setRedirect(true);
         }
