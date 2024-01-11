@@ -12,8 +12,8 @@ const fs = require('fs');
 const UserModel = require('./models/User');
 const PostModel = require('./models/Post');
 const app = express();
-const CLIENT_URL = "https://yashblogs.onrender.com"
-// const CLIENT_URL = "http://localhost:3000"
+// const CLIENT_URL = "https://yashblogs.onrender.com"
+const CLIENT_URL = "http://localhost:3000"
 app.use(cors({ credentials: true, origin: CLIENT_URL }));
 // app.use(cors(
 //     {
@@ -53,8 +53,8 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
     const { userName, userPassword } = req.body;
     const userDoc = await UserModel.findOne({ userName });
-    if(!userDoc){
-        res.status(400).json({message:'invalid_username'});
+    if (!userDoc) {
+        res.status(400).json({ message: 'invalid_username' });
         return;
     }
     const passOk = bcrypt.compareSync(userPassword, userDoc.userPassword);
@@ -62,13 +62,13 @@ app.post("/login", async (req, res) => {
         //logged in
         jwt.sign({ userName, id: userDoc.id }, secret, {}, (err, token) => {
             if (err) throw err;
-            res.cookie('token', token,{ sameSite: 'none', secure: true }).json({
+            res.cookie('token', token, { sameSite: 'none', secure: true }).json({
                 id: userDoc._id,
                 userName,
             });
         });
     } else {
-        res.status(400).json({message:'invalid_userpassword'});
+        res.status(400).json({ message: 'invalid_userpassword' });
     }
 })
 
@@ -84,7 +84,7 @@ app.get("/profile", (req, res) => {
 })
 
 app.post('/logout', (req, res) => {
-    res.cookie('token', '',{ sameSite: 'none', secure: true }).json('ok');
+    res.cookie('token', '', { sameSite: 'none', secure: true }).json('ok');
 })
 
 app.post('/post', uploadMiddlewear.single('file'), async (req, res) => {
@@ -137,6 +137,16 @@ app.put('/post', uploadMiddlewear.single('file'), async (req, res) => {
         const ext = parts[parts.length - 1];
         newPath = path + '.' + ext;
         fs.renameSync(path, newPath);
+
+        const uplfilepath = newPath;
+
+        await imgbbUploader(process.env.IMGBB, newPath)
+            .then((response) => {
+                newPath = response.url;
+            })
+            .catch((error) => console.error(error));
+
+        fs.unlinkSync(uplfilepath);
     }
 
     const { token } = req.cookies;
