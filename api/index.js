@@ -12,8 +12,8 @@ const fs = require('fs');
 const UserModel = require('./models/User');
 const PostModel = require('./models/Post');
 const app = express();
-// const CLIENT_URL = "https://yashblogs.onrender.com"
-const CLIENT_URL = "http://localhost:3000"
+const CLIENT_URL = "https://yashblogs.onrender.com"
+// const CLIENT_URL = "http://localhost:3000"
 app.use(cors({ credentials: true, origin: CLIENT_URL }));
 // app.use(cors(
 //     {
