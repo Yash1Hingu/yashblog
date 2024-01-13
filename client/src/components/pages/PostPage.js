@@ -3,6 +3,10 @@ import { Link, useParams } from "react-router-dom"
 import { UserContext } from "../../store/user-context";
 import { API_PORT } from "../../util/path";
 
+import whatsappIcon from '../../images/whatsapp-icon.svg'
+import linkedin from '../../images/linkedin.svg'
+import twitter from '../../images/twitter.svg'
+
 export default function PostPage() {
     const [postInfo, setPostInfo] = useState(null);
     //userInfo : who are logged In
@@ -35,5 +39,13 @@ export default function PostPage() {
             <img src={`${postInfo.cover}`} alt="" />
         </div>
         <div dangerouslySetInnerHTML={{ __html: postInfo.content }} className="content" />
+
+        <div className="share_post_link">
+            <a href={`whatsapp://send?text=${API_PORT}#/post/${postInfo._id}`} data-action="share/whatsapp/share"><img src={whatsappIcon} alt="" /></a>
+
+            <a href={`https://twitter.com/intent/tweet?url=${API_PORT}#/post/${postInfo._id}&text=Check%20out%20this%20awesome%20post!`} target="_blank"><img src={twitter} alt="twitter" /></a>
+
+            <a href={`https://www.linkedin.com/shareArticle?url=${API_PORT}#/post/${postInfo._id}&title=Awesome%20Post`} target="_blank"><img src={linkedin} alt="linkedin" /></a>
+        </div>
     </div>
 }  
