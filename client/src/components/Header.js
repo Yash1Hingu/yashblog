@@ -6,6 +6,7 @@ import { API_PORT } from "../util/path";
 
 export default function Header() {
     const { userInfo, setUserInfo } = useContext(UserContext);
+    const [isActive, setIsActive] = useState('');
     useEffect(() => {
         fetch(`${API_PORT}profile`, {
             method: "GET",
@@ -29,7 +30,16 @@ export default function Header() {
         setUserInfo(null);
     }
 
+    function handleActive(linkname) {
+        if (linkname === 'login') {
+            setIsActive('login')
+        }
+        if (linkname === 'register') {
+            setIsActive('register')
+        }
+    }
     const userName = userInfo?.userName;
+    const userProfile = userInfo?.profile;
 
     return <header>
         <Link to="/" className="logo">
@@ -38,15 +48,26 @@ export default function Header() {
         <nav>
             {userName && (
                 <>
-                    <p>hello ,{userName}</p>
                     <Link to="/create" className="create_post_btn">Create New Post</Link>
                     <a onClick={handleLogout}>Logout</a>
+                    <div className="user_profile">
+                        <p>hello ,{userName}</p>
+                        <img src={userProfile} alt="user" />
+                    </div>
                 </>
             )}
             {!userName && (
                 <>
-                    <Link to="/login">Login</Link>
-                    <Link to="/register">Register</Link>
+                    <Link
+                        to="/login"
+                        onClick={() => handleActive('login')}
+                        className={isActive === 'login' && 'active_btn'}
+                    >Login</Link>
+                    <Link
+                        to="/register"
+                        onClick={() => handleActive('register')}
+                        className={isActive === 'register'&& 'active_btn'}
+                    >Register</Link>
                 </>
             )}
         </nav>

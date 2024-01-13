@@ -4,7 +4,7 @@ import { UserContext } from "../../store/user-context";
 import { API_PORT } from "../../util/path";
 import Input from "../UI/Input";
 import { useInput } from "../hooks/useInput";
-import { isEmail, isNotEmpty, hasMinLength } from '../../util/validation.js';
+import { isPassword, isUsername } from '../../util/validation.js';
 import UserProgressContext from "../../store/UserProgressContext.js";
 
 export default function LoginPage() {
@@ -14,14 +14,14 @@ export default function LoginPage() {
         handleUserInput: handleuserNameInput,
         handleBlur: handleuserNameBlur,
         hasError: userNameIsValid
-    } = useInput("", (value) => isEmail(value) && isNotEmpty(value));
+    } = useInput("", (value) => !isUsername(value));
 
     const {
         value: userPassword,
         handleUserInput: handleuserPasswordInput,
         handleBlur: handleuserPasswordBlur,
         hasError: userpasswordIsValid
-    } = useInput("", (value) => hasMinLength(value, 8) && isNotEmpty(value));
+    } = useInput("", (value) => !isPassword(value));
 
     const [redirect, setRedirect] = useState(false);
     const { userInfo, setUserInfo } = useContext(UserContext);
@@ -48,10 +48,10 @@ export default function LoginPage() {
         } else {
             response.json().then(isvalid => {
                 if (isvalid.message === "invalid_username") {
-                    userProgressCtx.showModal('Invalid User Name');
+                    userProgressCtx.showModal('User not Exist.');
                     
                 } else if (isvalid.message === "invalid_userpassword") {
-                    userProgressCtx.showModal('Invalid User Password');
+                    userProgressCtx.showModal('Password is Incorrect.');
                 }
             })
         }
@@ -72,7 +72,7 @@ export default function LoginPage() {
             onBlur={handleuserNameBlur}
             onChange={handleuserNameInput}
             value={userName}
-            error={userNameIsValid && "Please Enter Valid Email."}
+            error={userNameIsValid && isUsername(userName)}
             required
         />
         <Input
@@ -84,7 +84,7 @@ export default function LoginPage() {
             onBlur={handleuserPasswordBlur}
             onChange={handleuserPasswordInput}
             value={userPassword}
-            error={userpasswordIsValid && "Please Enter Valid Password."}
+            error={userpasswordIsValid && isPassword(userPassword)}
             required
         />
         <button>Login</button>

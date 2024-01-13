@@ -36,13 +36,30 @@ app.get('/', (req, res) => {
     res.json("My API Running");
 })
 
-app.post("/register", async (req, res) => {
-    const { userName, userPassword } = req.body;
+app.post("/register", uploadMiddlewear.single('file'), async (req, res) => {
+    const { originalname, path } = req.file;
+    const parts = originalname.split('.');
+    const ext = parts[parts.length - 1];
+    let newPath = path + '.' + ext;
+    fs.renameSync(path, newPath);
+    const uplfilepath = newPath;
+
+    await imgbbUploader(process.env.IMGBB, newPath)
+        .then((response) => {
+            newPath = response.url;
+        })
+        .catch((error) => console.error(error));
+
+    fs.unlinkSync(uplfilepath);
+
+    const { userName, userPassword, userEmail } = req.body;
 
     try {
         const userDoc = await UserModel.create({
             userName,
-            userPassword: bcrypt.hashSync(userPassword, salt)
+            userPassword: bcrypt.hashSync(userPassword, salt),
+            userEmail,
+            profile: newPath
         });
         res.json(userDoc);
     } catch (e) {
@@ -60,11 +77,12 @@ app.post("/login", async (req, res) => {
     const passOk = bcrypt.compareSync(userPassword, userDoc.userPassword);
     if (passOk) {
         //logged in
-        jwt.sign({ userName, id: userDoc.id }, secret, {}, (err, token) => {
+        jwt.sign({ userName, id: userDoc.id ,profile: userDoc.profile}, secret, {}, (err, token) => {
             if (err) throw err;
             res.cookie('token', token, { sameSite: 'none', secure: true }).json({
                 id: userDoc._id,
                 userName,
+                profile: userDoc.profile
             });
         });
     } else {

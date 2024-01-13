@@ -15,13 +15,13 @@ export default function PostPage() {
             })
         })
     }, [])
-
+    const userID = userInfo?.id;
     if (!postInfo) return '';
     return <div className="post-page">
         <h1>{postInfo.title}</h1>
         <p className="author">by {postInfo.author['userName']}</p>
         <time>{new Date(postInfo.createdAt).toUTCString()}</time>
-        {userInfo.id === postInfo.author['_id'] && (
+        {userID === postInfo.author['_id'] && (
             <div className="edit_container">
                 <Link to={`/edit/${postInfo._id}`} className="edit_btn">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

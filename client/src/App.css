@@ -39,6 +39,15 @@ header a {
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color .2s ease-in-out;
+}
+header a:hover{
+  background-color: #05b4ff63;
+}
+header a:focus{
+  background-color: #05B3FF;
 }
 
 header a.logo {
@@ -57,6 +66,20 @@ header nav {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  align-items: center;
+}
+.user_profile{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.user_profile img{
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+}
+.active_btn{
+  background-color: #05B3FF;
 }
 
 div.post {
