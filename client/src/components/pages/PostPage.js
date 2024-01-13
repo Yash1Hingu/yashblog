@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react"
 import { Link, useParams } from "react-router-dom"
 import { UserContext } from "../../store/user-context";
-import { API_PORT } from "../../util/path";
+import { API_PORT, CLIENT_URL, SHARE_URL } from "../../util/path";
 
 import whatsappIcon from '../../images/whatsapp-icon.svg'
 import linkedin from '../../images/linkedin.svg'
@@ -41,11 +41,11 @@ export default function PostPage() {
         <div dangerouslySetInnerHTML={{ __html: postInfo.content }} className="content" />
 
         <div className="share_post_link">
-            <a href={`whatsapp://send?text=${API_PORT}#/post/${postInfo._id}`} data-action="share/whatsapp/share"><img src={whatsappIcon} alt="" /></a>
+            <a href={`whatsapp://send?text=Check%20out%20this%20awesome%20post!${SHARE_URL}${postInfo._id}`} data-action="share/whatsapp/share"><img src={whatsappIcon} alt="" /></a>
 
-            <a href={`https://twitter.com/intent/tweet?url=${API_PORT}#/post/${postInfo._id}&text=Check%20out%20this%20awesome%20post!`} target="_blank"><img src={twitter} alt="twitter" /></a>
+            <a href={`https://twitter.com/intent/tweet?url=${SHARE_URL}${postInfo._id}&text=Check%20out%20this%20awesome%20post!`} target="_blank"><img src={twitter} alt="twitter" /></a>
 
-            <a href={`https://www.linkedin.com/shareArticle?url=${API_PORT}#/post/${postInfo._id}&title=Awesome%20Post`} target="_blank"><img src={linkedin} alt="linkedin" /></a>
+            <a href={`https://www.linkedin.com/shareArticle?url=${SHARE_URL}${postInfo._id}&title=Awesome%20Post`} target="_blank"><img src={linkedin} alt="linkedin" /></a>
         </div>
     </div>
 }  
