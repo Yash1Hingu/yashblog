@@ -1,4 +1,4 @@
-export default function Loader({height}){
-    return <div className="loader-post" style={{height: height}}>
+export default function Loader({...props}){
+    return <div className="loader-post" style={{...props}}>
     </div>
 }

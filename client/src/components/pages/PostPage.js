@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, Navigate, useParams } from "react-router-dom"
 import { UserContext } from "../../store/user-context";
 import { API_PORT, CLIENT_URL, SHARE_URL } from "../../util/path";
 
@@ -12,6 +12,9 @@ export default function PostPage() {
     //userInfo : who are logged In
     const { userInfo } = useContext(UserContext);
     const { id } = useParams();
+    const [redirect, setRedirect] = useState(false);
+    const userID = userInfo?.id;
+
     useEffect(() => {
         fetch(`${API_PORT}post/${id}`).then(response => {
             response.json().then(postInfo => {
@@ -19,11 +22,30 @@ export default function PostPage() {
             })
         })
     }, [])
-    const userID = userInfo?.id;
+
+    async function handleDelete() {
+        const response = await fetch(`${API_PORT}delete/${id}`, {
+            method: 'DELETE',
+            credentials: 'include',
+        })
+        if (response.ok) {
+            response.json().then(msg => console.log(msg))
+            setRedirect(true);
+        }
+    }
+
     if (!postInfo) return '';
+    if (redirect) {
+        return <Navigate to={'/user/' + userID} />
+    }
+
     return <div className="post-page">
         <h1>{postInfo.title}</h1>
-        <p className="author">by {postInfo.author['userName']}</p>
+        <Link
+            to={`/user/${postInfo.author['_id']}`}
+            className="author"
+        >by {postInfo.author['userName']}
+        </Link>
         <time>{new Date(postInfo.createdAt).toUTCString()}</time>
         {userID === postInfo.author['_id'] && (
             <div className="edit_container">
@@ -33,6 +55,9 @@ export default function PostPage() {
                     </svg>
 
                     Edit This Post</Link>
+                <button className="cancel_btn" onClick={handleDelete}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 24 24"><path fill="#fa0055" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zm2-4h2V8H9zm4 0h2V8h-2z" /></svg>
+                    Delete this post</button>
             </div>
         )}
         <div className="image">

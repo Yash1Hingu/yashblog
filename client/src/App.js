@@ -11,6 +11,7 @@ import PostPage from './components/pages/PostPage';
 import EditPost from './components/pages/EditPostPage';
 import { UserProgressContextProvider } from './store/UserProgressContext';
 import ShowMessage from './components/ShowMessage';
+import UserPage from './components/pages/UserPage';
 
 function App() {
   return <UserProgressContextProvider>
@@ -23,6 +24,7 @@ function App() {
           <Route path='/create' element={<CreatePost />} />
           <Route path='/post/:id' element={<PostPage />} />
           <Route path='/edit/:id' element={<EditPost />} />
+          <Route path='/user/:id' element={<UserPage />} />
         </Route >
       </Routes>
       <ShowMessage/>

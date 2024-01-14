@@ -4,6 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import { Navigate } from 'react-router-dom';
 import { API_PORT } from '../../util/path';
 import UserProgressContext from '../../store/UserProgressContext';
+import { UserContext } from '../../store/user-context';
 
 const modules = {
     toolbar: [
@@ -25,6 +26,8 @@ const formats = [
 ];
 
 export default function CreatePost() {
+    const { userInfo, setUserInfo } = useContext(UserContext);
+    const userId = userInfo?.id;
     const userProgressCtx = useContext(UserProgressContext);
     const [title, setTitle] = useState('');
     const [summary, setSummary] = useState('');
@@ -52,7 +55,7 @@ export default function CreatePost() {
     }
 
     if (redirect) {
-        return <Navigate to={'/'} />
+        return <Navigate to={`/user/${userId}`} />
     }
     return <form onSubmit={createNewPost}>
         <input

@@ -11,6 +11,7 @@ const uploadMiddlewear = multer({ dest: 'uploads/' });
 const fs = require('fs');
 const UserModel = require('./models/User');
 const PostModel = require('./models/Post');
+
 const app = express();
 const CLIENT_URL = "https://yashblogs.onrender.com"
 // const CLIENT_URL = "http://localhost:3000"
@@ -77,7 +78,7 @@ app.post("/login", async (req, res) => {
     const passOk = bcrypt.compareSync(userPassword, userDoc.userPassword);
     if (passOk) {
         //logged in
-        jwt.sign({ userName, id: userDoc.id ,profile: userDoc.profile}, secret, {}, (err, token) => {
+        jwt.sign({ userName, id: userDoc.id, profile: userDoc.profile }, secret, {}, (err, token) => {
             if (err) throw err;
             res.cookie('token', token, { sameSite: 'none', secure: true }).json({
                 id: userDoc._id,
@@ -141,12 +142,23 @@ app.get('/post', async (req, res) => {
     res.json(posts);
 })
 
+app.get('/userposts/:id', async (req, res) => {
+    const { id } = req.params;
+    const posts = await PostModel.find({ author: id }).populate('author', ['userName']).sort({ createdAt: -1 }).limit(20);
+    res.json(posts);
+})
+
 app.get('/post/:id', async (req, res) => {
     const { id } = req.params;
     const postDoc = await PostModel.findById(id).populate('author', ['userName']);
     res.json(postDoc);
 })
 
+app.get('/user/:id', async (req, res) => {
+    const { id } = req.params;
+    const userDoc = await UserModel.findById(id, { userPassword: false });
+    res.json(userDoc);
+})
 app.put('/post', uploadMiddlewear.single('file'), async (req, res) => {
     let newPath = null;
     if (req.file) {
@@ -183,6 +195,17 @@ app.put('/post', uploadMiddlewear.single('file'), async (req, res) => {
             cover: newPath ? newPath : postDoc.cover,
         })
         res.json(postDoc);
+    })
+})
+
+app.delete('/delete/:id', async (req, res) => {
+    const { id } = req.params;
+    const { token } = req.cookies;
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) throw err;
+        await PostModel.deleteOne({ _id: id })
+            .then(msg => res.json(msg))
+            .catch(e => res.json(e));
     })
 })
 app.listen(4000, () => {

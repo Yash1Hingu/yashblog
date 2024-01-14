@@ -43,10 +43,12 @@ header a {
   border-radius: 4px;
   transition: background-color .2s ease-in-out;
 }
-header a:hover{
+
+header a:hover {
   background-color: #05b4ff63;
 }
-header a:focus{
+
+header a:focus {
   background-color: #05B3FF;
 }
 
@@ -68,17 +70,20 @@ header nav {
   gap: 18px;
   align-items: center;
 }
-.user_profile{
+
+.user_profile {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-.user_profile img{
+
+.user_profile img {
   width: 42px;
   height: 42px;
   border-radius: 50%;
 }
-.active_btn{
+
+.active_btn {
   background-color: #05B3FF;
 }
 
@@ -118,12 +123,14 @@ div.post .texts h2 {
   font-size: 24px;
   font-weight: bold;
 }
-div.content ol,div.content ul{
+
+div.content ol,
+div.content ul {
   margin: 24px;
 }
 
-.share_post_link{
-  display:flex;
+.share_post_link {
+  display: flex;
   gap: 12px;
   justify-content: space-evenly;
   margin-bottom: 32px;
@@ -132,19 +139,22 @@ div.content ol,div.content ul{
   border-radius: 12px;
   align-items: center;
 }
-.share_post_link a{
-  padding:8px 16px;
+
+.share_post_link a {
+  padding: 8px 16px;
   border-radius: 12px;
   transition: all .2s ease-in-out;
 }
-.share_post_link a:hover{
+
+.share_post_link a:hover {
   background-color: #05b4ff7f;
 }
-pre{
-  text-wrap:wrap;
+
+pre {
+  text-wrap: wrap;
   width: 100%;
   overflow: scroll;
-  background-color:#222;
+  background-color: #222;
   border-radius: 8px;
   margin: 12px 0;
   padding: 14px;
@@ -159,6 +169,7 @@ div.post div.texts p.info {
 }
 
 p.info .author {
+  text-align: center;
   text-decoration: none;
   font-weight: bold;
   margin: 12px 0;
@@ -236,8 +247,10 @@ div.post-page h1 {
 }
 
 div.post-page .author {
+  display: block;
+  text-decoration: none;
+  margin-bottom: 12px;
   text-align: center;
-  margin-bottom: 4px;
   color: #ddd;
   opacity: 0.7;
   font-weight: 900;
@@ -260,14 +273,20 @@ div.post-page div.edit_container {
   margin-bottom: 18px;
   display: flex;
   justify-content: center;
+  gap: 14px;
+  align-items: center;
 }
 
-div.post-page div.edit_container a svg {
+div.post-page div.edit_container a svg,
+div.edit_container button svg {
   width: 18px;
   height: 18px;
 }
 
-div.post-page div.edit_container a {
+div.post-page div.edit_container a,
+div.edit_container button {
+  transition: all .5s ease-in-out;
+  border: none;
   text-decoration: none;
   background-color: #333;
   color: #ddd;
@@ -277,6 +296,19 @@ div.post-page div.edit_container a {
   width: fit-content;
   align-items: center;
   gap: 4px;
+}
+
+div.edit_container .cancel_btn {
+  margin-top: 0;
+}
+
+div.post-page div.edit_container a:hover {
+  background-color: #05B3FF;
+  color: #141414;
+}
+
+div.edit_container .cancel_btn:hover {
+  background-color: #f4005980;
 }
 
 .modal {
@@ -346,10 +378,10 @@ div.post-page div.edit_container a {
   }
 }
 
-.loader-post  {
+.loader-post {
   border-radius: 12px;
   margin-bottom: 24px;
-  background: linear-gradient(240deg,#141313,#393939);
+  background: linear-gradient(240deg, #141313, #393939);
   height: 250px;
   background-size: 120%;
   animation: gradient-animation 1s ease infinite;
@@ -359,7 +391,36 @@ div.post-page div.edit_container a {
   0% {
     background-position: 100% 0%;
   }
+
   100% {
     background-position: 0% 0%;
   }
+}
+
+
+div.userprofile_container .profile_wrapper {
+  height: 12rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+div.profile_header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: space-between;
+  border-bottom: 2px solid #333;
+  padding-bottom: 24px;
+}
+
+div.profile_header p {
+  font-weight: bold;
+}
+
+div.userprofile_container img {
+  width: 12rem;
 }

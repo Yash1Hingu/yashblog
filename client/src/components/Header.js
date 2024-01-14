@@ -39,6 +39,7 @@ export default function Header() {
         }
     }
     const userName = userInfo?.userName;
+    const userId = userInfo?.id;
     const userProfile = userInfo?.profile;
 
     return <header>
@@ -50,10 +51,10 @@ export default function Header() {
                 <>
                     <Link to="/create" className="create_post_btn">Create New Post</Link>
                     <a onClick={handleLogout}>Logout</a>
-                    <div className="user_profile">
+                    <Link to={`/user/${userId}`} className="user_profile">
                         <p>hello ,{userName}</p>
                         <img src={userProfile} alt="user" />
-                    </div>
+                    </Link>
                 </>
             )}
             {!userName && (
