@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Navigate } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { UserContext } from '../../store/user-context';
 const modules = {
     toolbar: [
         [{ 'header': [1, 2, false] }],
-        [{'color':[]},{'background':[]}],
+        [{ 'color': [] }, { 'background': [] }],
         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
         [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
         ['link', 'image'],
@@ -19,10 +19,10 @@ const modules = {
 };
 const formats = [
     'header',
-    'color','background',
+    'color', 'background',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
     'list', 'bullet', 'indent',
-    'link', 'image','code-block'
+    'link', 'image', 'code-block'
 ];
 
 export default function CreatePost() {
@@ -53,6 +53,10 @@ export default function CreatePost() {
             setRedirect(true);
         }
     }
+
+    useEffect(() => {
+        document.title = "Create Post|Yash Blogs"
+    }, [])
 
     if (redirect) {
         return <Navigate to={`/user/${userId}`} />

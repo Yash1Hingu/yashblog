@@ -38,6 +38,7 @@ export default function EditPost() {
                 setContent(postInfo.content);
             })
         })
+        document.title = "Edit Post|Yash Blogs"
     }, [])
 
     async function editPost(ev) {

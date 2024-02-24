@@ -12,9 +12,10 @@ export default function IndexPage() {
                 setPosts(posts);
             })
         })
+        document.title = "Home | Yash Blogs"
     }, [])
     return <>
-        {posts.length === 0 && (<><Loader height='150px'/><Loader height='150px'/><Loader height='150px'/><Loader height='150px'/></>)}
+        {posts.length === 0 && (<><Loader height='150px' /><Loader height='150px' /><Loader height='150px' /><Loader height='150px' /></>)}
         {posts.length > 0 && posts.map(post => (
             <Post {...post} key={post._id} />
         ))}

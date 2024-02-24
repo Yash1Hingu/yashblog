@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navigate } from 'react-router-dom';
 import { UserContext } from "../../store/user-context";
 import { API_PORT } from "../../util/path";
@@ -56,6 +56,10 @@ export default function LoginPage() {
             })
         }
     }
+
+    useEffect(() => {
+        document.title = "Login | Yash Blogs"
+    },[])
 
     if (redirect) {
         return <Navigate to={'/'} />

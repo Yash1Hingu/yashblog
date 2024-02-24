@@ -19,6 +19,7 @@ export default function PostPage() {
         fetch(`${API_PORT}post/${id}`).then(response => {
             response.json().then(postInfo => {
                 setPostInfo(postInfo);
+                document.title = postInfo.title;
             })
         })
     }, [])

@@ -12,6 +12,7 @@ export default function UserPage() {
         fetch(`${API_PORT}user/${id}`).then(response => {
             response.json().then(userInfo => {
                 setUserInfo(userInfo);
+                document.title = `${userInfo.userName} | Yash Blogs`;
             })
         })
         fetch(`${API_PORT}userposts/${id}`).then(response => {
@@ -19,6 +20,7 @@ export default function UserPage() {
                 setuserPosts(posts);
             })
         })
+
     }, [])
 
     if (!userInfo) return <><Loader height='150px' width='150px'/><Loader height='150px' /><Loader height='150px' /><Loader height='150px' /></>

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { API_PORT } from "../../util/path";
 import { Navigate } from "react-router-dom";
 import { useInput } from "../hooks/useInput";
@@ -60,6 +60,10 @@ export default function RegisterPage() {
             alert("Registration Failed");
         }
     }
+
+    useEffect(() => {
+        document.title = "Register | Yash Blogs"
+    },[])
 
     if (redirect) {
         return <Navigate to={'/login'} />
