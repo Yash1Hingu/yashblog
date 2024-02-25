@@ -20,15 +20,14 @@ body {
 }
 
 main {
-  padding: 12px;
   max-width: 2400px;
   margin: 0 auto;
 }
 
 header {
-  background-color: #1A1A1A;
-  padding: 12px;
-  border-radius: 8px;
+  backdrop-filter: blur(30px);
+  background-color: rgba(65, 65, 65, 0.308);
+  padding: 12px 16px;
   display: flex;
   justify-content: space-between;
   margin-bottom: 54px;
@@ -44,14 +43,6 @@ header a {
   padding: 4px 8px;
   border-radius: 4px;
   transition: background-color .2s ease-in-out;
-}
-
-header a:hover {
-  background-color: #05b4ff63;
-}
-
-header a:focus {
-  background-color: #05B3FF;
 }
 
 header a.logo {
@@ -229,17 +220,11 @@ button {
   margin-top: 12px;
 }
 
-div.post-page div.image {
-  max-height: 200px;
-  overflow: hidden;
-  display: flex;
-  border-radius: 12px;
+div.post-page {
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
-div.post-image div.image img {
-  object-fit: cover;
-  object-position: center center;
-}
 
 div.post-page a {
   color: #ddd;
@@ -428,4 +413,74 @@ div.profile_header p {
 
 div.userprofile_container img {
   width: 12rem;
+}
+
+
+.card {
+  width: 320px;
+  padding: 20px;
+  color: white;
+  background: linear-gradient(#212121, #212121) padding-box,
+    linear-gradient(145deg, transparent 35%, #e81cff, #40c9ff) border-box;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transform-origin: right bottom;
+  transition: all 0.2s ease-in-out;
+}
+
+.card .main-content {
+  flex: 1;
+}
+
+.card .header span:first-child {
+  font-weight: 600;
+  color: #717171;
+  margin-right: 4px;
+}
+
+.card .heading {
+  font-size: 24px;
+  margin: 24px 0 16px;
+  font-weight: 600;
+}
+
+.card .categories {
+  display: flex;
+  gap: 8px;
+}
+
+.card .categories span {
+  background-color: #e81cff;
+  padding: 4px 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  border-radius: 50em;
+}
+
+.card .footer {
+  font-weight: 600;
+  color: #717171;
+  margin-right: 4px;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+@media screen and (max-width:700px) {
+  .card:hover {
+    transform: scale(1);
+  }
+}
+
+.backgroundImg{
+  background-image: url('images/blog.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
 }

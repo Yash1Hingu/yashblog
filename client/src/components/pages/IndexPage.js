@@ -14,10 +14,10 @@ export default function IndexPage() {
         })
         document.title = "Home | Yash Blogs"
     }, [])
-    return <>
+    return <div className="flex justify-evenly gap-8 flex-wrap">
         {posts.length === 0 && (<><Loader height='150px' /><Loader height='150px' /><Loader height='150px' /><Loader height='150px' /></>)}
         {posts.length > 0 && posts.map(post => (
             <Post {...post} key={post._id} />
         ))}
-    </>
+    </div>
 }

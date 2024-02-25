@@ -6,7 +6,6 @@ import { API_PORT } from "../util/path";
 
 export default function Header() {
     const { userInfo, setUserInfo } = useContext(UserContext);
-    const [isActive, setIsActive] = useState('');
     useEffect(() => {
         fetch(`${API_PORT}profile`, {
             method: "GET",
@@ -29,21 +28,12 @@ export default function Header() {
         })
         setUserInfo(null);
     }
-
-    function handleActive(linkname) {
-        if (linkname === 'login') {
-            setIsActive('login')
-        }
-        if (linkname === 'register') {
-            setIsActive('register')
-        }
-    }
     const userName = userInfo?.userName;
     const userId = userInfo?.id;
     const userProfile = userInfo?.profile;
 
     return <header>
-        <Link to="/" className="logo">
+        <Link to="/home" className="logo">
             <img src={yashlogo} alt="" />
             Blogs
         </Link>
@@ -62,14 +52,32 @@ export default function Header() {
                 <>
                     <Link
                         to="/login"
-                        onClick={() => handleActive('login')}
-                        className={isActive === 'login' && 'active_btn'}
-                    >Login</Link>
+                        className="hover:rotate-2 brightness-150 dark:brightness-100 group hover:shadow-lg hover:shadow-pink-700/60 transition ease-in-out hover:scale-105 p-1 rounded-xl bg-gradient-to-br from-pink-800 via-pink-600 to-pink-800 hover:from-pink-700 hover:via-pink-800 hover:to-pink-600"
+                    >
+                        <div
+                            className="px-6 py-2 backdrop-blur-xl bg-black/80 rounded-xl font-bold w-full h-full"
+                        >
+                            <div
+                                className="group-hover:scale-100 flex group-hover:text-pink-500 text-pink-600 gap-1 inline"
+                            >
+                                Login
+                            </div>
+                        </div>
+                    </Link>
                     <Link
                         to="/register"
-                        onClick={() => handleActive('register')}
-                        className={isActive === 'register'&& 'active_btn'}
-                    >Register</Link>
+                        className="hover:rotate-2 brightness-150 dark:brightness-100 group hover:shadow-lg hover:shadow-sky-700/60 transition ease-in-out hover:scale-105 p-1 rounded-xl bg-gradient-to-br from-sky-800 via-sky-600 to-sky-800 hover:from-sky-700 hover:via-sky-800 hover:to-sky-600"
+                    >
+                        <div
+                            className="px-6 py-2 backdrop-blur-xl bg-black/80 rounded-xl font-bold w-full h-full"
+                        >
+                            <div
+                                className="group-hover:scale-100 flex group-hover:text-sky-500 text-sky-600 gap-1 inline"
+                            >
+                                Register
+                            </div>
+                        </div>
+                    </Link>
                 </>
             )}
         </nav>

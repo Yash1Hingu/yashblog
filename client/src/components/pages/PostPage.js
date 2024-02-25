@@ -62,7 +62,7 @@ export default function PostPage() {
             </div>
         )}
         <div className="image">
-            <img src={`${postInfo.cover}`} alt="" />
+            <img src={`${postInfo.cover}`} alt="" className="aspect-video rounded-3xl"/>
         </div>
         <div dangerouslySetInnerHTML={{ __html: postInfo.content }} className="content" />
 

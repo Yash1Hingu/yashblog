@@ -12,13 +12,15 @@ import EditPost from './components/pages/EditPostPage';
 import { UserProgressContextProvider } from './store/UserProgressContext';
 import ShowMessage from './components/ShowMessage';
 import UserPage from './components/pages/UserPage';
+import LadingPage from './components/pages/LadingPage';
 
 function App() {
   return <UserProgressContextProvider>
     <UserContextProvider>
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route index element={<IndexPage />} />
+          <Route index element={<LadingPage />} />
+          <Route path='/home' element={<IndexPage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/create' element={<CreatePost />} />
