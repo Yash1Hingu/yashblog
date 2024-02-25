@@ -61,7 +61,7 @@ export default function CreatePost() {
     if (redirect) {
         return <Navigate to={`/user/${userId}`} />
     }
-    return <form onSubmit={createNewPost}>
+    return <form onSubmit={createNewPost} className='p-8'>
         <input
             type="text"
             placeholder="Title"

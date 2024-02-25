@@ -40,7 +40,7 @@ export default function PostPage() {
         return <Navigate to={'/user/' + userID} />
     }
 
-    return <div className="post-page">
+    return <div className="post-page p-4">
         <h1>{postInfo.title}</h1>
         <Link
             to={`/user/${postInfo.author['_id']}`}

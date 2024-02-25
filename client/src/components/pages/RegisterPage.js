@@ -69,7 +69,7 @@ export default function RegisterPage() {
         return <Navigate to={'/login'} />
     }
 
-    return <form onSubmit={register} className="register">
+    return <form onSubmit={register} className="register p-8">
         <h1>Register</h1>
         <label htmlFor="userProfile">Profile Image</label>
         <input

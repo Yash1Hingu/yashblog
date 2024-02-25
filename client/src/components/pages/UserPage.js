@@ -25,14 +25,14 @@ export default function UserPage() {
 
     if (!userInfo) return <><Loader height='150px' width='150px'/><Loader height='150px' /><Loader height='150px' /><Loader height='150px' /></>
 
-    return <div className="userprofile_container">
+    return <div className="userprofile_container p-8">
         <div className="profile_header">
             <div className="profile_wrapper">
                 <img src={userInfo.profile} alt="user profile." />
             </div>
             <p>{userInfo.userName}</p>
         </div>
-        <div className="user_posts">
+        <div className="user_posts mt-8">
             {userposts.length === 0 && (<><Loader height='150px' /><Loader height='150px' /><Loader height='150px' /><Loader height='150px' /></>)}
             {userposts.length > 0 && userposts.map(post => (
                 <Post {...post} key={post._id} />

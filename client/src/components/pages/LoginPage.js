@@ -65,7 +65,7 @@ export default function LoginPage() {
         return <Navigate to={'/home'} />
     }
 
-    return <form onSubmit={login} className="login">
+    return <form onSubmit={login} className="login p-8">
         <h1>Login</h1>
         <Input
             label="Username"

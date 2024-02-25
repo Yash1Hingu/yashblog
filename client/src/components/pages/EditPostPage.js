@@ -65,7 +65,7 @@ export default function EditPost() {
         return <Navigate to={'/post/' + id} />
     }
 
-    return <form onSubmit={editPost}>
+    return <form onSubmit={editPost} className='p-8'>
         <input
             type="text"
             placeholder="Title"
