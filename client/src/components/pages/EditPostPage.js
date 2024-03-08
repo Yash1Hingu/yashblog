@@ -9,17 +9,20 @@ import { API_PORT } from "../../util/path";
 const modules = {
     toolbar: [
         [{ 'header': [1, 2, false] }],
+        [{ 'color': [] }, { 'background': [] }],
         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
         [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
         ['link', 'image'],
-        ['clean']
+        ['clean'],
+        ['code-block']
     ],
 };
 const formats = [
     'header',
+    'color', 'background',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
     'list', 'bullet', 'indent',
-    'link', 'image'
+    'link', 'image', 'code-block'
 ];
 
 export default function EditPost() {

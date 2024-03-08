@@ -3,6 +3,7 @@ import Post from "../Post";
 import { API_PORT } from "../../util/path";
 import UserProgressContext from "../../store/UserProgressContext";
 import Loader from "../UI/Loader";
+import Posts from "../UI/Posts";
 
 export default function IndexPage() {
     const [posts, setPosts] = useState([]);
@@ -14,10 +15,10 @@ export default function IndexPage() {
         })
         document.title = "Home | Yash Blogs"
     }, [])
-    return <div className="flex justify-evenly gap-8 flex-wrap">
-        {posts.length === 0 && (<><Loader height='150px' /><Loader height='150px' /><Loader height='150px' /><Loader height='150px' /></>)}
-        {posts.length > 0 && posts.map(post => (
-            <Post {...post} key={post._id} />
-        ))}
-    </div>
+    return (<>
+        <div className="">
+            {posts.length === 0 && (<><Loader height='150px' /><Loader height='150px' /><Loader height='150px' /><Loader height='150px' /></>)}
+            {posts.length > 0 && <Posts posts={posts}/>}
+        </div>
+    </>)
 }

@@ -41,7 +41,7 @@ export default function PostPage() {
     }
 
     return <div className="post-page p-4">
-        <h1>{postInfo.title}</h1>
+        <h1 className="text-4xl font-bold">{postInfo.title}</h1>
         <Link
             to={`/user/${postInfo.author['_id']}`}
             className="author"
@@ -62,9 +62,10 @@ export default function PostPage() {
             </div>
         )}
         <div className="image">
-            <img src={`${postInfo.cover}`} alt="" className="aspect-video rounded-3xl"/>
+            <img src={`${postInfo.cover}`} alt="" className="aspect-video rounded-3xl" />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: postInfo.content }} className="content" />
+
+        <div dangerouslySetInnerHTML={{ __html: postInfo.content }} className="content"/>
 
         <div className="share_post_link">
             <a href={`whatsapp://send?text=Check%20out%20this%20awesome%20post!${SHARE_URL}${postInfo._id}`} data-action="share/whatsapp/share"><img src={whatsappIcon} alt="" /></a>
