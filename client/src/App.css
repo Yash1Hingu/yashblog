@@ -120,16 +120,19 @@ div.post .texts h2 {
   font-weight: bold;
 }
 
-div.content{
+div.content {
   font-size: 20px;
 }
-div.content img{
+
+div.content img {
   border-radius: 18px;
 }
-div.content h2{
+
+div.content h2 {
   font-weight: 900;
   font-size: 38px;
 }
+
 div.content ol,
 div.content ul {
   margin: 24px;
@@ -232,7 +235,15 @@ button {
 
 div.post-page {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 840px;
+  margin-left: 260px;
+}
+
+@media screen and (max-width:700px) {
+  div.post-page {
+    margin: 0 auto;
+    padding: 20px;
+  }
 }
 
 
@@ -256,7 +267,7 @@ div.post-page .author {
   font-weight: 900;
 }
 
-div.post-page .author:hover{
+div.post-page .author:hover {
   color: #05B3FF;
   text-decoration: underline;
 }
@@ -492,7 +503,7 @@ div.userprofile_container img {
   }
 }
 
-.backgroundImg{
+.backgroundImg {
   background-image: url('images/blog.jpg');
   background-size: cover;
   background-position: center center;
@@ -500,7 +511,7 @@ div.userprofile_container img {
   position: relative;
 }
 
-.ReactTags__selected{
+.ReactTags__selected {
   height: 4rem;
   padding: 8px;
   overflow-y: scroll;
@@ -509,7 +520,8 @@ div.userprofile_container img {
   flex-wrap: wrap;
   gap: 4px;
 }
-.ReactTags__tag{
+
+.ReactTags__tag {
   display: flex;
   align-items: center;
   width: fit-content;
@@ -520,7 +532,8 @@ div.userprofile_container img {
   border-radius: 16px;
   margin-bottom: 4px;
 }
-.ReactTags__remove{
+
+.ReactTags__remove {
   color: black;
   padding: 2px;
   margin: 0;
