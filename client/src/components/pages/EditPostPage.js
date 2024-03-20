@@ -5,6 +5,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Navigate } from 'react-router-dom';
 import { API_PORT } from "../../util/path";
+import MarkdownEditor from "@uiw/react-markdown-editor";
 
 const modules = {
     toolbar: [
@@ -85,11 +86,10 @@ export default function EditPost() {
             type="file"
             onChange={(ev) => { setFiles(ev.target.files) }}
         />
-        <ReactQuill
+        <MarkdownEditor
             value={content}
+            height="500px"
             onChange={newValue => { setContent(newValue) }}
-            modules={modules}
-            formats={formats}
         />
         <button>Update Post</button>
     </form>
