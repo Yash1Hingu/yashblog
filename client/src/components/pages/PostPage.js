@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react"
 import { Link, Navigate, useParams } from "react-router-dom"
 import { UserContext } from "../../store/user-context";
 import { API_PORT, CLIENT_URL, SHARE_URL } from "../../util/path";
+import MarkdownEditor from '@uiw/react-markdown-editor';
 
 import whatsappIcon from '../../images/whatsapp-icon.svg'
 import linkedin from '../../images/linkedin.svg'
@@ -65,7 +66,7 @@ export default function PostPage() {
             <img src={`${postInfo.cover}`} alt="" className="aspect-video rounded-3xl" />
         </div>
 
-        <div dangerouslySetInnerHTML={{ __html: postInfo.content }} className="content"/>
+        <MarkdownEditor.Markdown source={postInfo.content} height="200px" />
 
         <div className="share_post_link">
             <a href={`whatsapp://send?text=Check%20out%20this%20awesome%20post!${SHARE_URL}${postInfo._id}`} data-action="share/whatsapp/share"><img src={whatsappIcon} alt="" /></a>

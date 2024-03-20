@@ -246,6 +246,12 @@ div.post-page {
   }
 }
 
+.wmde-markdown{
+  padding: 32px 0;
+  background-color: transparent !important;
+  color: #e9e8e8 !important;
+}
+
 
 div.post-page a {
   color: #ddd;

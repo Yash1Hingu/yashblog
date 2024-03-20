@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
+import MarkdownEditor from '@uiw/react-markdown-editor';
 import 'react-quill/dist/quill.snow.css';
 import { Navigate } from 'react-router-dom';
 import { API_PORT } from '../../util/path';
@@ -81,11 +82,10 @@ export default function CreatePost() {
             onChange={(ev) => { setFiles(ev.target.files) }}
             required
         />
-        <ReactQuill
+        <MarkdownEditor
             value={content}
+            height="500px"
             onChange={newValue => { setContent(newValue) }}
-            modules={modules}
-            formats={formats}
         />
         <button>Create Post</button>
     </form>
