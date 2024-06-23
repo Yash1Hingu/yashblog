@@ -107,10 +107,6 @@ The application will be available at `http://localhost:3000`.
 5. Visit user profiles to see their posts and information.
 6. Share interesting blog posts on your social media accounts.
 
-## License
-
-This project is licensed under the MIT License.
-
 ## Contact
 
 If you have any questions or feedback, feel free to contact me at yash23hingu@gmail.com.
